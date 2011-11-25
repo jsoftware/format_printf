@@ -94,8 +94,10 @@ NB.   G f or E based on size, s string, S string or boxed list, c character,
 NB.   j J default format (":), J J default format (":), and if result has rank > 1,
 NB.   flatten to rank 1 with newlines between items
 NB.
-NB. Henry H. Rich (glasss@bellsouth.net), June 2001
+NB. Henry H. Rich, June 2001
 NB.
+NB. Changes 2011/11/25: support '0' flag, fix some bugs with negative-number formatting.
+NB.               '0' overrides integer precision
 NB. Changes 2001/05/18: speed up %s, drop support for lists from %s, add %S
 NB.              to handle lists, make rank of vsprintf 0 or 1 depending
 NB.              on # of fields, create vbsprintf, improve AR utilities
