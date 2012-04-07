@@ -6,7 +6,7 @@ DESCRIPTION=: 0 : 0
 Printf provides verbs and adverbs for formatted printing in the manner of C's printf and sprintf.
 )
 
-VERSION=: '1.0.1'
+VERSION=: '1.0.2'
 
 RELEASE=: 'j602 j701'
 
