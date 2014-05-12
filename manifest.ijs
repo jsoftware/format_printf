@@ -15,3 +15,4 @@ history.txt
 printf.ijs
 printftest.ijs
 )
+PLATFORMS=: 'linux win darwin android'
