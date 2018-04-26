@@ -8,7 +8,9 @@ Printf provides verbs and adverbs for formatted printing in the manner of C's pr
 
 VERSION=: '1.0.11'
 
-RELEASE=: 'j602 j701 j801 j802 j803 j804 j805 j806 j807'
+RELEASE=: ''
+
+FOLDER=: 'format/printf'
 
 FILES=: 0 : 0
 history.txt
