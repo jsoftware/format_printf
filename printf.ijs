@@ -108,7 +108,7 @@ thislocale=: '_' , (> 18!:5 '') , '_'
 
 display=: (i.0 0)"_ ((1!:2) 2:)
 ocol=: >@:({"1)
-ux_vy=: 2 : '(y~ x)~'
+ux_vy=: 2 : '(v~ u)~'
 butifnull=: 2 : 'v"_`u@.(*@#@])'
 
 NB.*cprintf v-- apply break format descriptor into fields
