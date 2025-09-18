@@ -3,9 +3,9 @@ display&('Error count: '&,)@: ": @: (+/) @: (1&~:) @: (".;._2) (0 : 0)
 'No fields' -: 'No fields' sprintf ''
 'This has %% no fields % either' -: 'This has %%%% no fields %% either' sprintf ''
 '%% This has %1% field' -: '%%%% This has %%%d%% field' sprintf 1
-92 39 10 9 8 13 12 13 10 -: a. i. '\\\''\l\t\b\r\f\n' sprintf ''
+(IFWIN{::92 39 10 9 8 13 12 10;92 39 10 9 8 13 12 13 10) -: a. i. '\\\''\l\t\b\r\f\n' sprintf ''
 'Testing ?verb?, should type        0 1 3' -: 'Testing ?verb?, should type %12?+/\?d' sprintf <i. 3
-('Verifying escapes.',CR,LF,'This is line 1',CR,LF,'This is line 2') -: 'Verifying escapes.\nThis is line %d\nThis is line %d' sprintf 1;2
+('Verifying escapes.',(IFWIN#CR),LF,'This is line 1',(IFWIN#CR),LF,'This is line 2') -: 'Verifying escapes.\nThis is line %d\nThis is line %d' sprintf 1;2
 ':1:' -: ':%d:' sprintf 1
 '55' -: '%u' sprintf 55
 '4294967241' -: '%u' sprintf _55

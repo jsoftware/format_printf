@@ -341,6 +341,16 @@ NB.*printf v-- apply sprintf, then type on console
 NB. Example: 'It took %d minutes to %S' printf 5 ;< 'play';3;'games'
 printf=: display@sprintf
 
+NB. x is field descriptor  y is data  result is boxed string.
+NB. Apply the width here, since that applies equally to all types
+exeformat=: 4 : '(x`:6)&.> y'"0
+
+NB. x is opened compiled format (list of fixed string ; gerund), y is data
+NB. Apply the descriptors to the data; then interleave the plaintext
+NB. strings with the results from the descriptors; raze the results to combine them
+NB. into one output string
+applyformat=: ;@(0&{::@[ ,. (,&(<''))@(1&{:: ux_vy exeformat))
+
 NB.*qprintf v-- quick display
 NB. y is string of labels/expressions.  The last character in y is a
 NB.  delimiter; y is cut using this character to separate the
@@ -381,24 +391,14 @@ NB. printf template for the data
 buildfmt=. }.^:(' '&=@{.) @ ; @ ((#~ >:@(e.&'%\'))&.>@:({."1)@] ,. ($~ #))
 NB. Put it all together.
 NB. Fix all the subroutines to avoid namespace pollution
-qsprintf_z_=: (<'%J')&$: : (fields@[ f. (buildfmt f. sprintf ".&.>@:({:"1)@]) exprs@] f.)
-qprintf_z_=: display f. @: qsprintf
+qsprintf=: (<'%J')&$: : (fields@[ f. (buildfmt f. sprintf ".&.>@:({:"1)@]) exprs@] f.)
+qprintf=: display f. @: (qsprintf f.)
 
 NB. The field descriptor is
 NB.   typeid,width,precision,centerspec,posfmt,altfmt
 NB.     centerspec is 0 (right), 1 (right with zero fill), 2 (center) , 3 (left)
 NB.     posfmt is 0 (no char), 1 ('+'), 2 (' ')
 NB.     altfmt is 1 if the 'alternate formatting' is requested
-
-NB. x is opened compiled format (list of fixed string ; gerund), y is data
-NB. Apply the descriptors to the data; then interleave the plaintext
-NB. strings with the results from the descriptors; raze the results to combine them
-NB. into one output string
-applyformat=: ;@(0&{::@[ ,. (,&(<''))@(1&{:: ux_vy exeformat))
-
-NB. x is field descriptor  y is data  result is boxed string.
-NB. Apply the width here, since that applies equally to all types
-exeformat=: 4 : '(x`:6)&.> y'"0
 
 NB. x is field descriptor  y is displayable result
 NB. We lengthen the data if it is smaller than the minimum width,
@@ -468,5 +468,5 @@ NB. ":, but if result has rank > 2, put a NL before each item, and after
 NB. the whole thing, so that the array is broken out visibly
 formatJ=: (,&newline)@:((,@:(newline&,"1)"2)^:(<:@#@$)) ^:(1:<#@$) @ formatj
 
-eps=. ;: 'vbsprintf vsprintf sprintf cprintf printf'
+eps=. ;: 'vbsprintf vsprintf sprintf cprintf printf qsprintf qprintf'
 ('`' , ;:^:_1 ,&'_z_'&.> eps)=: (,&thislocale&.>) eps
