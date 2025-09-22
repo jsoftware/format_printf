@@ -381,8 +381,8 @@ NB. printf template for the data
 buildfmt=. }.^:(' '&=@{.) @ ; @ ((#~ >:@(e.&'%\'))&.>@:({."1)@] ,. ($~ #))
 NB. Put it all together.
 NB. Fix all the subroutines to avoid namespace pollution
-qsprintf_z_=: (<'%J')&$: : (fields@[ f. (buildfmt f. sprintf ".&.>@:({:"1)@]) exprs@] f.)
-qprintf_z_=: display f. @: qsprintf
+qsprintf0_z_=: qsprintf_z_=: (<'%J')&$: : (fields@[ f. (buildfmt f. sprintf ".&.>@:({:"1)@]) exprs@] f.)
+qprintf0_z_=: qprintf_z_=: display f. @: qsprintf
 
 NB. The field descriptor is
 NB.   typeid,width,precision,centerspec,posfmt,altfmt
